@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Metadaten anpassen -->
+        <meta name="description" content="Eine kurze Beschreibung Deiner App" />
+        <meta name="keywords" content="Schlagworte, mit Komma separiert" />
+        <meta name="author" content="Dein Name oder Organisation" />
+
+        <!-- OpenLayers Version 6.9.0 einbinden -->
+        <!-- Externe Ressourcen vorsichtshalber in der Produktion immer über den eigenen Server bereitstellen.
+             Ansonsten gehen personenbezogene Daten wie die IP Adresse evtl. an Server
+             in Nicht-EU Staaten, und damit läge ein Verstoß gegen die Datenschutzgrundverordnung  in der EU vor -->
+        <!-- <link rel="stylesheet" href="css/ol.css" type="text/css" /> -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/css/ol.css"
+            type="text/css"
+        />
+        <!-- <script src="js/ol.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"></script>
+
+        <!-- Eigene Sourcen -->
+        <link rel="stylesheet" href="css/app.css" type="text/css" />
+        <!-- Favicon anpassen bei Bedarf-->
+        <link rel="icon" type="image/svg+xml" href="images/location-dot.svg" />
+        <!-- Titel anpassen -->
+        <title>Interessante Orte</title>
+    </head>
+    <body>
+        <!-- Header mit Titel und Icons -->
+        <div id="head" class="head">
+            <div id="head_left">
+                <h1 id="titleApp" class="title">
+                    &nbsp; Interessante Orte &nbsp; &nbsp;
+                </h1>
+            </div>
+            <div id="head_right">
+                <img
+                    tabindex="0"
+                    class="icons"
+                    id="helpIcon"
+                    src="images/help.png"
+                    title="Über, Hilfe und Daten"
+                    alt="Über, Hilfe und Daten"
+                    height="45"
+                    width="45"
+                />
+                <img
+                    tabindex="0"
+                    class="icons"
+                    id="legalIcon"
+                    src="images/legal.png"
+                    title="Impressum & Datenschutzerklärung"
+                    alt="Impressum & Datenschutzerklärung"
+                    height="45"
+                    width="45"
+                />
+                <img
+                    tabindex="0"
+                    class="icons"
+                    id="wheelchairIcon"
+                    src="images/wheelchair.png"
+                    title="Barrierefreie Webseite"
+                    alt="Barrierefreie Webseite"
+                    height="45"
+                    width="45"
+                />
+            </div>
+        </div>
+
+        <!-- Element für die Karte -->
+        <div tabindex="0" id="map" class="map"></div>
+
+        <!-- Modales Fenster in dem die einzelnen HTML Seiten (Hilfe, Objektinformation, etc.)
+        angezeigt werden können -->
+
+        <div id="modal" class="modal">
+            <div id="modalHeader" class="modal_header">
+                <div id="modelText">Interessante Orte</div>
+                <img
+                    tabindex="0"
+                    id="closeHelp"
+                    class="closeInfo"
+                    src="images/close.svg"
+                    alt="close"
+                    height="30"
+                    width="30"
+                />
+            </div>
+            <iframe
+                width="100%"
+                height="97%"
+                id="iframe"
+                frameborder="0"
+                src="about:blank"
+            ></iframe>
+        </div>
+
+        <!-- Skripte zum einbinden der benutzerdefinierten OpenLayers  Werkzeuge ("custom tools"):
+             Standortanzeige und Anzeige der initialen Position -->
+        <script src="js/location_control.js"></script>
+        <script src="js/home_control.js"></script>
+
+        <!-- Javascript -->
+        <!-- Nur zum besseren Verständnis hier nicht extern ausgegliedert -->
+        <script>
+            // Zeichenvorschrift für die Punktgeomtrien
+            const fill = new ol.style.Fill({
+                color: 'rgba(255,255,0,0.6)',
+            });
+            const stroke = new ol.style.Stroke({
+                color: '#FF0000',
+                width: 1.5,
+            });
+            const text = new ol.style.Text({
+                font: 'bold 16px "Open Sans", "Arial Unicode MS", "sans-serif"',
+                placement: 'point',
+                fill: new ol.style.Fill({color: 'rgba(0,0,0,1)'}),
+            });
+
+            const style = new ol.style.Style({
+                image: new ol.style.Circle({
+                    fill: fill,
+                    stroke: stroke,
+                    radius: 12,
+                }),
+
+                text: text,
+            });
+
+            // Funktion für die Zeichenvorschriften
+            const styleFunction = function (feature) {
+                style.getText().setText(feature.get('beschriftung'));
+                return style;
+            };
+
+            // Geodaten für Punktlayer einlesen
+            const sourcePoint = new ol.source.Vector({
+                url: 'geodata/point.geojson',
+                format: new ol.format.GeoJSON(),
+            });
+
+            // Warten bis Geometrie verfügbar ist und in den Bildschirm einpassen
+            // Abstände der Punkte zum Rand des Bildschirmes
+            // [oben, rechts, unten, links]
+            const padding = [50, 50, 50, 50];
+            sourcePoint.once('change', function (evt) {
+                if (sourcePoint.getState() === 'ready') {
+                    if (sourcePoint.getFeatures().length > 0) {
+                        map.getView().fit(sourcePoint.getExtent(), {
+                            size: map.getSize(),
+                            padding: padding,
+                        });
+                    }
+                }
+            });
+
+            // Vektor Layer für Punktdaten erstellen
+            const vectorLayer = new ol.layer.Vector({
+                source: sourcePoint,
+                style: styleFunction,
+            });
+
+            /* Linien Vektor Layer erstellen und Geodaten einlesen,
+                         falls dies nicht benötigt wird auskommentieren */
+
+            const vectorLineLayer = new ol.layer.Vector({
+                source: new ol.source.Vector({
+                    url: 'geodata/line.geojson',
+                    format: new ol.format.GeoJSON(),
+                }),
+                style: new ol.style.Style({
+                    stroke: new ol.style.Stroke({color: '#00FFFF', width: 4.0}),
+                }),
+            });
+
+            // Feature erstellen für die Standortanzeige
+            const positionFeature = new ol.Feature();
+            positionFeature.setStyle(
+                new ol.style.Style({
+                    image: new ol.style.Icon({
+                        src: 'images/location-dot.svg',
+                    }),
+                }),
+            );
+            /* Vektor Layer erstellen für die Standortanzeige mit
+                                                Feature als Quelle */
+            const positionLayer = new ol.layer.Vector({
+                source: new ol.source.Vector({
+                    features: [positionFeature],
+                }),
+            });
+
+            // initiale Koordinate und Zoomstufe
+            /* initiale Zoomstufe, wird überschrieben durch die
+                        Ausdehnung des Punktlayers view.fit() */
+            const centerInit = [0, 0];
+            const zoomInit = 0;
+
+            // die Map
+            const map = new ol.Map({
+                // Werkzeuge in Karte einbinden
+                controls: ol.control
+                    .defaults({})
+                    .extend([new LocationAPI(), new Home()]),
+                // ID des Div Elementes in dem die Karte eingebunden werden soll
+                target: 'map',
+                /* Wichtig für Mobilgeräte um zwischen "Mausklick" & Verschieben besser
+                            differenzieren zu können. Der Standardwert beträgt 1 */
+                moveTolerance: 5,
+                layers: [
+                    // OpenLayers Hintergrundkarte
+                    new ol.layer.Tile({
+                        source: new ol.source.OSM(),
+                    }),
+                    // Nutzergenerierte Layer
+                    // Falls nicht benötigt den vectorLineLayer auskommentieren
+                    vectorLineLayer,
+                    vectorLayer,
+                    positionLayer,
+                ],
+                // OL View
+                view: new ol.View({
+                    center: centerInit,
+                    zoom: zoomInit,
+                }),
+            });
+
+            // Standortanzeige
+            let geolocationError = false;
+            const geolocation = new ol.Geolocation({
+                projection: map.getView().getProjection(),
+            });
+            geolocation.on('error', function (error) {
+                geolocationError = true;
+            });
+
+            // Mausklick in die Karte
+            map.on('click', function (evt) {
+                vectorLayer.getFeatures(evt.pixel).then(function (features) {
+                    const feature = features.length ? features[0] : undefined;
+                    if (features.length) {
+                        if (feature.getProperties().externe_url) {
+                            window.open(feature.getProperties().externe_url);
+                        } else {
+                            openModal(feature.getProperties().id);
+                        }
+                    }
+                });
+            });
+
+            // Modales Fenster öffnen mit einer HTML Seite
+            function openModal(id) {
+                document.getElementById('modal').style.display = 'block';
+                document.getElementById('iframe').src = 'html/' + id + '.html';
+                // Mauszeiger Events anderer Elemente blockieren
+                document.getElementById('head').style.pointerEvents = 'none';
+                document.getElementById('head').style.opacity = '50%';
+                document.getElementById('map').style.pointerEvents = 'none';
+                document.getElementById('map').style.opacity = '50%';
+
+                const controls = document.getElementsByClassName('ol-control');
+                let i;
+                for (i = 0; i < controls.length; i++) {
+                    controls[i].style.pointerEvents = 'none';
+                    controls[i].style.opacity = '50%';
+                }
+            }
+
+            // Modales Fenster schließen
+            function closeModal() {
+                document.getElementById('modal').style.display = 'none';
+                document.getElementById('head').style.pointerEvents = 'auto';
+                document.getElementById('head').style.opacity = '1';
+                document.getElementById('map').style.pointerEvents = 'auto';
+                document.getElementById('map').style.opacity = '1';
+                const controls = document.getElementsByClassName('ol-control');
+                let i;
+                for (i = 0; i < controls.length; i++) {
+                    controls[i].style.pointerEvents = 'auto';
+                    controls[i].style.opacity = '1';
+                }
+                document.getElementById('map').focus();
+            }
+
+            // Event Listener
+
+            // Modales Fenster schließen
+            // via Mausklick
+            document
+                .getElementById('modal')
+                .addEventListener('click', closeModal);
+            // via Tastatur - Eingabetaste
+            document.getElementById('modal').addEventListener(
+                'keypress',
+                function (e) {
+                    if (e.key === 'Enter') {
+                        closeModal();
+                    }
+                },
+                false,
+            );
+
+            // Hilfe im modalen Fenster öffnen
+            document.getElementById('helpIcon').addEventListener(
+                'click',
+                function () {
+                    openModal('hilfe');
+                },
+                false,
+            );
+
+            document.getElementById('helpIcon').addEventListener(
+                'keypress',
+                function (e) {
+                    if (e.key === 'Enter') {
+                        openModal('hilfe');
+                    }
+                },
+                false,
+            );
+
+            // Impressum und Datenschutzerklärung im modalen fenster öffnen
+            document.getElementById('legalIcon').addEventListener(
+                'click',
+                function () {
+                    openModal('impressum_datenschutz');
+                },
+                false,
+            );
+            document.getElementById('legalIcon').addEventListener(
+                'keypress',
+                function (e) {
+                    if (e.key === 'Enter') {
+                        openModal('hilfe');
+                    }
+                },
+                false,
+            );
+
+            // Barrierefreie Webseite öffnen
+            document.getElementById('wheelchairIcon').addEventListener(
+                'click',
+                function () {
+                    window.open('html/barrierefrei.html');
+                },
+                false,
+            );
+            document.getElementById('wheelchairIcon').addEventListener(
+                'keypress',
+                function (e) {
+                    if (e.key === 'Enter') {
+                        window.open('html/barrierefrei.html');
+                    }
+                },
+                false,
+            );
+
+            /* Funktionalität die beim Start ausgeführt werden soll, sobald
+                        der HTML Content zur Verfügung steht */
+
+            document.addEventListener('DOMContentLoaded', function (event) {
+                // Es kommt sonst bei Mobilgeräten z.T. zu Problemen mit dem Fokus der Elemente
+                document.getElementById('map').focus();
+
+                /* Für sehr kleine Displays kann hier bei Bedarf die Schriftgröße für den Titel,
+                            oder der Titel selbst angepasst werden */
+                if (innerWidth < 380) {
+                    const title = document.getElementById('titleApp');
+                    title.style.fontSize = '1.2rem';
+                    title.style.top = '0px';
+                    title.innerHTML = 'Neuer Titel < 380';
+                }
+                if (innerWidth >= 380 && innerWidth < 420) {
+                    const title = document.getElementById('titleApp');
+                    title.style.fontSize = '1.3rem';
+                    title.style.top = '0px';
+                    title.innerHTML = 'Neuer Titel > 380 < 420';
+                }
+            });
+        </script>
+    </body>
+</html>

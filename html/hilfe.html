@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Metadaten anpassen -->
+        <meta name="description" content="Hilfe" />
+        <meta name="keywords" content="Schlagworte, mit Komma separiert" />
+        <meta name="author" content="Dein Name oder Organisation" />
+        <!-- Wenn Du nicht möchtest, dass die Seite von den Suchmaschinen indexiert wird,
+             den folgenden Tag auskommentieren -->
+        <!-- <meta name="robots" content="noindex" /> -->
+        <title>Hilfe</title>
+        <!-- Favicon anpassen bei Bedarf-->
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="../images/location-dot.svg"
+        />
+        <link rel="stylesheet" href="../css/modal.css" type="text/css" />
+    </head>
+    <body id="body" class="iframe_content">
+        <!-- Link zum Impressum und der Datenschutzerklärung -->
+        <div class="impress" id="impressum">
+            <a target="_blank" href="impressum_datenschutz.html"
+                >Impressum und Datenschutz</a
+            >
+        </div>
+
+        <h1>Anleitung für Interessante Orte</h1>
+
+        <p>
+            Die Anleitung aus dem Github kannst Du auch direkt hier lokal im
+            Browser öffnen.
+        </p>
+        <p>
+            Dazu muss allerdings zuerst eine Browsererweiterung für die
+            Darstellung des
+            <a target="_blank" href="https://de.wikipedia.org/wiki/Markdown"
+                >Markdowns (.md)</a
+            >
+            installiert werden. Einen Markdown Viewer gibt es für alle modernen
+            Browser.
+        </p>
+        <a target="_blank" href="../readme.md">readme.md</a>
+        <p>
+            Markdown ist wie HTML eine Auszeichnungssprache. Es ist leichter zu
+            schreiben und weniger Code.
+        </p>
+
+        <h1>Hilfe</h1>
+
+        <h2>Navigation mit der Maus</h2>
+        <p>
+            Maus bei gedrückter linker Maustaste bewegen, um die Karte zu
+            verschieben.
+        </p>
+        <p>Durch das Bewegen des Mausrads kann in der Karte gezoomt werden.</p>
+        <p>
+            Auf einen Kartenausschnitt kann gezoomt werden, indem bei gedrückter
+            Shift-Taste mit gedrückter linker Maustaste ein Rahmen in der Karte
+            aufgezogen wird.
+        </p>
+        <p>
+            Durch Anklicken der Orte werden die Detailinformationen geöffnet. Es
+            gibt keine entsprechende Funktionalität mit der Tastatur. Zum Öffnen
+            der Detailinformationen der Orte bitte die barrierefreie Version
+            nutzen.
+        </p>
+
+        <h2>Navigation mit der Tastatur</h2>
+        <p>
+            Tab Taste bedienen, bis die Karte im Fokus ist. Durch das Drücken
+            der Plus/Minus Tasten wird gezoomt. Die Pfeiltasten bedienen zum
+            Verschieben der Karte.
+        </p>
+        <h2>Navigation mittels Icons</h2>
+        <p>
+            <img
+                src="../images/zoom_in.png"
+                alt="Hineinzoomen"
+                title="Hineinzoomen"
+            />
+            Hineinzoomen
+        </p>
+        <p>
+            <img
+                src="../images/zoom_out.png"
+                alt="Herauszoomen"
+                title="Herauszoomen"
+            />
+            Hinauszoomen
+        </p>
+        <h2>Funktionen</h2>
+        <p>
+            <img
+                src="../images/location-dot-white.svg"
+                width="30"
+                height="30"
+                alt="Zum eigenen Standort navigieren"
+                title="Zum eigenen Standort navigieren"
+            />
+            Zum eigenen Standort navigieren. Dazu muss die Standortfreigabe im
+            Browser aktiviert werden. Dies macht zumeist nur Sinn bei
+            Mobilgeräten.
+        </p>
+        <p>
+            <img
+                src="../images/home-solid.svg"
+                width="30"
+                height="30"
+                alt="Zur initialen Karte navigieren"
+                title="Zur initialen Karte navigieren"
+            />
+            Zur initialen Karte navigieren.
+        </p>
+        <p>
+            <img
+                src="../images/help.png"
+                height="45"
+                width="45"
+                alt="Hilfe"
+                title="Hilfe"
+            />
+            Hilfe
+        </p>
+        <p>
+            <img
+                src="../images/legal.png"
+                height="45"
+                width="45"
+                alt="Impressum und Datenschutzerklärung"
+                title="Impressum und Datenschutzerklärung"
+            />
+            Impressum & Datenschutzerklärung
+        </p>
+        <p>
+            <img
+                src="../images/wheelchair.png"
+                height="45"
+                width="45"
+                alt="Barrierefreie Webseite"
+                title="Barrierefreie Webseite"
+            />
+            Zugang zur barrierefreien Version der Webseite. Alle Orte können
+            dort direkt aufzurufen werden, ohne die Kartenanwendung.
+        </p>
+    </body>
+
+    <script>
+        // Impressum wegschalten bei Integration in die Karte
+        document.addEventListener('DOMContentLoaded', function (event) {
+            if (parent.document.getElementById('iframe')) {
+                document.getElementById('impressum').style.display = 'none';
+            }
+        });
+    </script>
+</html>

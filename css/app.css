@@ -1,0 +1,110 @@
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.ol-viewport {
+    overflow: unset !important;
+}
+
+.map {
+    width: 100%;
+    height: calc(100% - 65px);
+}
+.head {
+    height: 55px;
+    color: white;
+}
+
+#head_right {
+    position: absolute;
+    right: 10px;
+}
+
+body {
+    background-color: black;
+}
+
+.icons {
+    position: relative;
+    cursor: pointer;
+}
+
+.title {
+    float: left;
+    top: -20px;
+    position: relative;
+}
+/* Modales Fenster für Objketinformation
+
+/* Kleine Bildschirmbreite - 768 Pixel */
+
+@media only screen and (max-width: 768px) {
+    .modal {
+        padding: 5px;
+        display: none;
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: black;
+        color: white;
+        z-index: 9999;
+    }
+}
+/* Bildschirmbreite > 768 Pixel */
+
+@media only screen and (min-width: 768px) {
+    .modal {
+        padding: 20px;
+        display: none;
+        position: fixed;
+        top: 100px;
+        left: 50px;
+        right: 50px;
+        bottom: 50px;
+        background-color: black;
+        color: white;
+        z-index: 9999;
+        max-width: 850px;
+        margin: auto;
+    }
+}
+
+.closeInfo {
+    right: 15px;
+    top: 15px;
+    position: absolute;
+}
+
+.modal_content {
+    margin-right: 30px;
+    overflow: auto;
+    height: calc(100% - 140px);
+}
+.modal_header {
+    height: 40px;
+}
+
+/* OpenLayer Tools */
+
+.location-api {
+    top: 120px;
+    left: 0.5em;
+    background-color: black;
+}
+
+.home-control {
+    top: 180px;
+    left: 0.5em;
+    background-color: black;
+}
+
+.ol-control button {
+    height: 45px;
+    width: 45px;
+    font-size: 1.5em;
+    background-color: black;
+}

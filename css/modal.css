@@ -1,0 +1,20 @@
+.iframe_content {
+    color: white;
+    background-color: black;
+    margin: auto;
+    max-width: 800px;
+}
+a {
+    color: cyan;
+}
+
+body {
+    font-size: large;
+}
+
+.impress {
+    right: 15px;
+    position: fixed;
+    top: 5px;
+    padding-bottom: 20px;
+}
