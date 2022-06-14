@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Metadaten anpassen -->
+        <meta name="description" content="Eine kurze Beschreibung Deiner App" />
+        <meta name="keywords" content="Schlagworte, mit Komma separiert" />
+        <meta name="author" content="Dein Name oder Organisation" />
+        <!-- Wenn Du nicht möchtest, dass die Seite von den Suchmaschinen indexiert wird,
+             den folgenden Tag auskommentieren -->
+        <!-- <meta name="robots" content="noindex" /> -->
+        <!-- Titel anpassen -->
+        <title>Ort 4</title>
+        <!-- Favicon anpassen bei Bedarf-->
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="../images/location-dot.svg"
+        />
+        <link rel="stylesheet" href="../css/modal.css" type="text/css" />
+    </head>
+    <body id="body" class="iframe_content">
+        <!-- Link zum Impressum und der Datenschutzerklärung -->
+        <div style="position: absolute; right: 15px" id="impressum">
+            <a target="_blank" href="impressum_datenschutz.html"
+                >Impressum und Datenschutz</a
+            >
+        </div>
+
+        <!-- Dein HTML -->
+
+        <h1>Ort 4</h1>
+        <p>
+            <a
+                target="_blank"
+                href="https://de.wikipedia.org/wiki/M%C3%BClheimer_Stadtgarten"
+            >
+                Mülheimer Stadtgarten</a
+            >
+            mit Blick auf den Weiher, Standort Nord.
+        </p>
+        <figure>
+            <img
+                src="../images/point_4_500.webp"
+                alt="Beschreibung"
+                style="max-width: 100%"
+            />
+            <figcaption>Deine Bildunterschrift</figcaption>
+        </figure>
+
+        <hr />
+
+        <h2>Barrierefreiheit</h2>
+        <p>
+            Kartenanwendungen sind nicht wirklich barrierefrei zu gestalten und
+            z.B. auch von der
+            <a
+                target="_blank"
+                href="https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32016L2102&from=DE"
+                >EU-Richtlinie zur Barrierefreiheit</a
+            >
+            ausgenommen (Art 1 Abs. 4 Buchst.). Trotzdem kann etwas getan
+            werden.
+        </p>
+        <h3>Tastaturbedienung</h3>
+        <p>
+            Alle Elemente, die durch die Tastatur fokussiert werden sollen,
+            brauchen eine Eigenschaft:
+        </p>
+        <code>tabindex="0"</code><br />
+        <p>
+            Das war es auch schon. Durch die Tab-Taste kann dann von Element zu
+            Element navigiert werden. Das Hervorheben des gerade fokussierten
+            Elemente wird dann der Browser erledigt. Je nach Browser
+            unterschiedlich.
+        </p>
+        <p>
+            Ist die Karte im Fokus, kann durch die Plus/Minus Tasten gezoomt
+            werden. Durch die Pfeiltasten wird die Karte verschoben.
+        </p>
+        <p>
+            Genau die Punkte mit den Orten zu treffen, dürfte aber extrem
+            schwierig werden. Aus diesem Grunde wurde hier auch gar nicht erst
+            ein Klick Event implementiert, sondern eine alternative
+            barrierefreie Seite erstellt.
+        </p>
+        <h3>Barrierefreie Alternativseite</h3>
+        <p>
+            Da wir für jeden unserer Orte HTML Seiten erstellt haben, ist es uns
+            möglich auch eine barrierefreie Alternativseite ohne größeren
+            Aufwand zu erstellen.
+        </p>
+        <p>
+            Auf der sehr einfach gestalteten HTML Seite
+            <code>barrierefrei.html</code> werden einfach nur die Orte verlinkt.
+        </p>
+        <p>
+            Der <code>tabindex</code> muss hier nicht mit angegeben werden, dies
+            erledigt der Browse von selbst.
+        </p>
+        <p>
+            Falls Ihr einmal hören wollt, wie sich Eure Seiten mit einem
+            ScreenReader anhören, könnt Ihr das Firefox Plugin
+            <a
+                target="_blank"
+                href="https://addons.mozilla.org/de/firefox/addon/pericles/"
+                >Pericles</a
+            >
+            installieren.
+        </p>
+        <p>
+            Wichtig ist direkt die Sprache mit anzugeben im HTML Tag, hier:
+            lang="de"
+        </p>
+        <p>
+            Auf der Website
+            <a
+                target="_blank"
+                href="https://wiki.selfhtml.org/wiki/Barrierefreiheit/Webseiten_zug%C3%A4nglich_gestalten#WAI-ARIA"
+                >Barrierefreiheit/Webseiten zugänglich gestalten</a
+            >
+            ,gibt es Informationen zur praktischen Umsetzung.
+        </p>
+        <p>
+            Aufgrund der einfachen Struktur der Seiten wurde hier auf weitere
+            WAI-ARIA (Web Accessibility Initiative - Accessible Rich Internet
+            Applications) Attribute verzichtet. Die HTML Elemente selbst haben
+            bereits voreingestellte WAI-ARIA Rollen (<a
+                target="_blank"
+                href="https://wiki.selfhtml.org/wiki/HTML/Attribute/role/default-Rollen"
+                >Link</a
+            >). Bei komplexeren Seiten ist dies natürlich zu berücksichtigen.
+        </p>
+
+        <h3>Suchmaschinen</h3>
+        <p>
+            Auf der Hauptseite der Anwendung wird die barrierefreie Version der
+            Webseite verlinkt. Dadurch, dass die einzelnen HTML Seiten der Orte
+            wiederum über diese Seite verlinkt werden, werden auch diese von den
+            Suchmaschinen gefunden.
+        </p>
+        <p>
+            Sollte dies nicht gewünscht sein, kann dies durch einen Meta-Tag
+            auch unterbunden werden.
+        </p>
+        <code
+            >&lt;meta name=&quot;robots&quot; content=&quot;noindex&quot;
+            /&gt;</code
+        >
+        <p>
+            Um überhaupt gefunden zu werden, muss Deine Hauptseite allerdings
+            erst einmal von anderen Webseiten verlinkt werden.
+        </p>
+        <p>
+            Alternativ kannst Du die Seite auch direkt bei den Suchmaschinen
+            anmelden:
+        </p>
+        <ul>
+            <li>
+                <a
+                    target="_blank"
+                    href="https://search.google.com/search-console"
+                    >Google Search Console</a
+                >
+            </li>
+            <li>
+                <a target="_blank" href="https://www.bing.com/webmasters/"
+                    >Bing Webmaster Tool - erscheint dann auch bei Yahoo!</a
+                >
+            </li>
+        </ul>
+        <p>
+            Das war es auch leider schon so ziemlich an Suchmaschinen
+            Indexierungs-Anbietern.
+        </p>
+        <p>
+            Zwar gibt es noch einige alternative Suchmaschinen, doch die greifen
+            im Wesentlichen wieder auf die Indexe der üblichen drei Verdächtigen
+            zu. Mehr zu alternativen Suchmaschinen findet Ihr bei
+            <a
+                target="_blank"
+                href="https://digitalcourage.de/digitale-selbstverteidigung/es-geht-auch-ohne-google-alternative-suchmaschinen"
+                >DigitalCourage</a
+            >.
+        </p>
+        <p>
+            Dies ist natürlich alles andere als unproblematisch, wenn drei
+            Firmen bestimmen, was der Rest der Menschheit im Internet an
+            Informationen findet. Einmal ganz davon abgesehen, dass alle Deine
+            Suchen von diesen Firmen natürlich genutzt werden. Die Suche kostet
+            Dich Deine Daten.
+        </p>
+
+        <p>
+            Ein alternativer dezentralisierter Ansatz wäre z.B.
+            <a target="_blank" href="https://yacy.net">YaCy</a>.
+        </p>
+        <p>
+            Eine Initiative für einen öffentlich finanzierten, globalen Index
+            ist der
+            <a target="_blank" href="https://openwebindex.eu/">Open Web Index</a
+            >.
+        </p>
+        <p>
+            National sehr bedeutende Suchmaschinen sind
+            <a target="_blank" href="https://www.baidu.com/">Buidu (China)</a>
+            und
+            <a target="_blank" href="https://yandex.com/">Yandex (Russland)</a>.
+        </p>
+    </body>
+    <script>
+        // Impressum wegschalten bei Integration in die Karte
+        document.addEventListener('DOMContentLoaded', function (event) {
+            if (parent.document.getElementById('iframe')) {
+                document.getElementById('impressum').style.display = 'none';
+            }
+        });
+    </script>
+</html>

@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "points",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::3857" } },
+"features": [
+{ "type": "Feature", "properties": { "id": "1", "beschriftung": "1", "externe_url": null }, "geometry": { "type": "Point", "coordinates": [ 779937.630913759581745, 6613904.55703314486891 ] } },
+{ "type": "Feature", "properties": { "id": "2", "beschriftung": "2", "externe_url": null }, "geometry": { "type": "Point", "coordinates": [ 779777.525283789611422, 6613802.299787726253271 ] } },
+{ "type": "Feature", "properties": { "id": "3", "beschriftung": "3", "externe_url": null }, "geometry": { "type": "Point", "coordinates": [ 779670.593421437428333, 6613880.015294244512916 ] } },
+{ "type": "Feature", "properties": { "id": "4", "beschriftung": "4", "externe_url": null }, "geometry": { "type": "Point", "coordinates": [ 779755.905180472531356, 6614038.367942865006626 ] } },
+{ "type": "Feature", "properties": { "id": "5", "beschriftung": "5", "externe_url": "https://de.wikipedia.org/wiki/Jan-Wellem-Denkmal" }, "geometry": { "type": "Point", "coordinates": [ 779875.107912275008857, 6614018.500820897519588 ] } }
+]
+}

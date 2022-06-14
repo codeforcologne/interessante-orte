@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Metadaten anpassen -->
+        <meta name="description" content="Eine kurze Beschreibung Deiner App" />
+        <meta name="keywords" content="Schlagworte, mit Komma separiert" />
+        <meta name="author" content="Dein Name oder Organisation" />
+        <!-- Wenn Du nicht möchtest, dass die Seite von den Suchmaschinen indexiert wird,
+             den folgenden Tag auskommentieren -->
+        <!-- <meta name="robots" content="noindex" /> -->
+        <!-- Titel anpassen -->
+        <title>Ort 2</title>
+        <!-- Favicon anpassen bei Bedarf-->
+        <link rel="icon" type="image/svg+xml" href="../images/location-dot.svg" />
+        <link rel="stylesheet" href="../css/modal.css" type="text/css" />
+
+    </head>
+    <body id="body" class="iframe_content">
+
+        <!-- Link zum Impressum und der Datenschutzerklärung -->
+        <div class="impress" id="impressum">
+            <a target="_blank" href="impressum_datenschutz.html"
+                >Impressum und Datenschutz</a
+            >
+        </div>
+
+        <!-- Dein HTML -->
+
+        <h1>Ort 2</h1>
+        <p>
+            <a
+                target="_blank"
+                href="https://de.wikipedia.org/wiki/M%C3%BClheimer_Stadtgarten"
+            >
+                Mülheimer Stadtgarten</a
+            >
+            mit Blick auf den Weiher, Standort Süd.
+        </p>
+        <figure>
+            <img
+                src="../images/point_2_700.webp"
+                alt="Beschreibung"
+                style="max-width: 100%"
+            />
+            <figcaption>Deine Bildunterschrift</figcaption>
+        </figure>
+<hr/>
+
+<h2>Nachhaltiges Webdesign: Thema Bilder</h2>
+
+        <p>Bilder sagen mehr als 1000 Worte. Leider sind Bilddateien im Vergleich zu Textdateien aber auch sehr groß.
+            Dann gehen entsprechend viel Daten über die Leitung und es wird entsprechend viel Energie verbraucht und CO<sub>2</sub> produziert.</p>
+        <p>Denk an die Umwelt, und versuche den Web-Traffic so gering wie möglich zu halten.
+             Mit 800 Millionen Tonnen CO<sub>2</sub> pro Jahr liegt
+             "das Internet" auf Platz 6 bei den Emissionen der "Länder" (<a target="_blank" href="https://www.heise.de/tp/features/Stromfresser-Internet-4776573.html">Quelle</a>).</p>
+             <h3>Komprimiere Deine Bilder</h3>
+             <p>Das Bildformat <a target="_blank" href="https://de.wikipedia.org/wiki/WebP">WebP</a> ist sehr effizient und wird inzwischen von allen modernen Browsern unterstützt.
+             WebP Dateien lassen sich einfach mit dem beliebten freien Grafikprogramm <a target="_blank" href="https://www.gimp.org/">GIMP</a> erstellen.</p>
+
+             <h3>Möglichkeiten Bilder effizient einzubinden</h3>
+
+
+        <p>Du kannst z.B. ein kleineres Bild erstellen, welches dann via Mausklick von den Nutzer*innen
+             bei Bedarf in einem neuen Fenster in voller Größe geöffnet werden kann.</p>
+
+<center>
+        <figure>
+             <a
+            target="_blank"
+            href="../images/point_2_800.webp"
+        >
+            <img
+                src="../images/point_2_200.webp"
+                alt="Beschreibung"
+            /></a>
+            <figcaption>Deine Bildunterschrift (zum Vergrößern auf das Bild klicken)</figcaption>
+        </figure>
+    </center>
+
+    <p>So sieht das zugehörige HTML aus:</p>
+    <code>
+        &lt;center&gt; <br/>
+        &lt;figure&gt; <br/>
+             &lt;a
+            target=&quot;_blank&quot;
+            href=&quot;../images/point_2_800.webp&quot;
+        &gt;
+            &lt;img
+                src=&quot;../images/point_2_200.webp&quot;
+                alt=&quot;Beschreibung&quot;
+            /&gt;&lt;/a&gt; <br/>
+            &lt;figcaption&gt;Deine Bildunterschrift (zum Vergr&ouml;&szlig;ern auf das Bild klicken)&lt;/figcaption&gt; <br/>
+        &lt;/figure&gt; <br/>
+    &lt;/center&gt;
+    </code>
+    <p>Mittels des Hyperlinks Tag &lt;a&gt; wird das hochauflösende Bild in einem neuen Browser Tab geöffnet.</p>
+
+<!-- hier noch den Code reinschreieben -->
+
+        <p>Eine andere Möglichkeit ist es, mit dem HTML &lt;picture&gt; Tag die ausgelieferten Bilder
+            der Bildschirmbreite anzupassen, z.B. hier:
+            <ul>
+                <li> &gt; 700px Bildschirmbreite Foto mit 800px Breite und 272 KB</li>
+                <li> &gt; 500px Bildschirmbreite Foto mit 700px Breite und 207 KB</li>
+                <li> &lt;= 500px Bildschirmbreite Foto mit 500px Breite und 114 KB</li>
+            </ul>
+        Dies kann natürlich noch verfeinert werden, und auch die Ausrichtung des Gerätes kann berücksichtigt werden (
+        <a
+            target="_blank"
+            href="https://www.w3schools.com/css/css_rwd_images.asp"
+        >Responsive Web Design - Images</a>).
+    </p>
+        <p> Wird nun mit dem Smartphone in der Bild hineingezoomt, ist die Auflösung natürlich auch entsprechend geringer.
+            Hier muss sich also überlegt werden, was jetzt sinnvoller ist. </p>
+
+<p> Hier der HTML Code:</p>
+<p>
+<code>
+    &lt;picture&gt;<br/>
+    &lt;source
+        media=&quot;(min-width:700px)&quot;
+        srcset=&quot;../images/point_2_800.webp&quot;
+    /&gt;<br/>
+    &lt;source
+        media=&quot;(min-width:500px)&quot;
+        srcset=&quot;../images/point_2_700.webp&quot;
+    /&gt;<br/>
+    &lt;img
+        src=&quot;../images/point_2_500.webp&quot;
+        alt=&quot;Beschreibung&quot;
+        style=&quot;width: 100%&quot;
+    /&gt;<br/>
+&lt;/picture&gt;
+</code>
+</p>
+
+         <picture>
+            <source
+                media="(min-width:700px)"
+                srcset="../images/point_2_800.webp"
+            />
+            <source
+                media="(min-width:500px)"
+                srcset="../images/point_2_700.webp"
+            />
+            <img
+                src="../images/point_2_500.webp"
+                alt="Beschreibung"
+                style="width: 100%"
+            />
+        </picture>
+
+        <p> Das Attribut
+         <code>&quot;width: 100%&quot</code>
+         bewirkt jetzt allerdings auch, dass das Bild immer auf 100%
+        der Bildschirmbreite ausgegeben wird. Deswegen ist es in vielen Fällen sinnvoller, mit
+        <code>&quot;-max-width: 100%&quot</code>
+        zu arbeiten, da dies verhindert, dass das Bild größer dargestellt wird als es eigentlich ist.
+       </p>
+
+        <p>Wenn Du sehr viele Inhalte auf einer Seite hast, kannst Du die Bilder auch via "lazy loading"
+            dann hinzuladen, wenn die Nutzer*innen die Stelle bald erreichen.</p>
+
+<code>&lt;img src=&quot;../images/point_2_500.jpg&quot; loading=&quot;lazy&quot; alt=&quot;Beschreibung&quot; /&gt;</code>
+<p>Da der Browser schon einige Zeit bevor die Stelle erreicht wird, mit dem Nachladen anfängt, musst Du jetzt für den Effekt
+    fleißig nach unten scrollen. Auf einigen Mobilgeräten funktioniert dies nicht wie gewünscht.</p>
+
+<div style="height:2000px"></div>
+<p>
+<img id="lazyImg" src="../images/point_2_500.webp" style="max-width: 100%" loading="lazy" alt="Beschreibung">
+</p>
+    </body>
+    <script>
+
+    // Nachricht senden sobald das Bild geladen wird.
+    // Entfernen falls die Seite überarbeitet wird
+    document.getElementById('lazyImg').addEventListener(
+    'load',
+    function(){
+      alert('Jetzt wird das Bild geladen');
+    },
+    false
+  );
+
+
+        // Impressum wegschalten bei Integration in die Karte
+        document.addEventListener('DOMContentLoaded', function (event) {
+            if (parent.document.getElementById('iframe')) {
+                document.getElementById('impressum').style.display = 'none';
+            }
+        });
+    </script>
+</html>
