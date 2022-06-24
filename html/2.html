@@ -58,6 +58,21 @@
              <h3>Komprimiere Deine Bilder</h3>
              <p>Das Bildformat <a target="_blank" href="https://de.wikipedia.org/wiki/WebP">WebP</a> ist sehr effizient und wird inzwischen von allen modernen Browsern unterstützt.
              WebP Dateien lassen sich einfach mit dem beliebten freien Grafikprogramm <a target="_blank" href="https://www.gimp.org/">GIMP</a> erstellen.</p>
+<p>Falls Du auch ältere Browser unterstützen möchtest, bietet das HTML picture Element eine Rückfalllösung an.</p>
+<picture>
+    <source srcset="../images/point_2_200.webp" type="image/webp">
+    <source srcset="../images/point_2_200.jpg" type="image/jpeg">
+    <img src="../images/point_2_200.jpg">
+</picture>
+<p>
+<code>
+    &lt;picture&gt;<br/>
+    &lt;source srcset=&quot;../images/point_2_200.webp&quot; type=&quot;image/webp&quot;&gt;<br/>
+    &lt;source srcset=&quot;../images/point_2_200.jpg&quot; type=&quot;image/jpeg&quot;&gt;<br/>
+    &lt;img src=&quot;../images/point_2_200.jpg&quot;&gt;<br/>
+    &lt;/picture&gt;
+</code>
+</p>
 
              <h3>Möglichkeiten Bilder effizient einzubinden</h3>
 
