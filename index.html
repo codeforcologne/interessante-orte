@@ -213,7 +213,7 @@
                 layers: [
                     // OpenLayers Hintergrundkarte
                     new ol.layer.Tile({
-                        source: new ol.source.OSM(),
+                        source: new ol.source.OSM({url:'https://tile.openstreetmap.org/{z}/{x}/{y}.png'})
                     }),
                     // Nutzergenerierte Layer
                     // Falls nicht benötigt den vectorLineLayer auskommentieren
